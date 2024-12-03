@@ -1,6 +1,6 @@
 import { Client, Users,Databases } from 'node-appwrite';
-const { add,update,remove,read,readAll } = require("./yojna_repository.js");
-const { authenticateUser } = require("./auth.js");
+import { add,update,remove,read,readAll } from "./yojna_repository.js";
+import { authenticateUser } from "./auth.js";
 
 // This Appwrite function will be executed every time your function is triggered
 export default async ({ req, res, log, error }) => { 
