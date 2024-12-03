@@ -1,15 +1,15 @@
 import { Client, Users,Databases } from 'node-appwrite';
-import { add,update,remove,read,readAll } from "./yojna_repository.js";
-import { authenticateUser } from "./auth.js";
+// import { add,update,remove,read,readAll } from "./yojna_repository.js";
+// import { authenticateUser } from "./auth.js";
 
 // This Appwrite function will be executed every time your function is triggered
 export default async ({ req, res, log, error }) => { 
 
-  try{
-    authenticateUser();
-  } catch(e){
-    return res.send({ error: 'Unauthorise Access' }, 401);
-  }
+  // try{
+  //   authenticateUser();
+  // } catch(e){
+  //   return res.send({ error: 'Unauthorise Access' }, 401);
+  // }
 
   // You can use the Appwrite SDK to interact with other services
   // For this example, we're using the Users service
