@@ -1,5 +1,4 @@
-import { YojnaRequestHandler } from "../request_handlers/yojna_request_handler";
-
+import { YojnaRequestHandler } from "../request_handlers/yojna_request_handler.js";
 
 export function createYojnaRequestHandler(
    authorRepository,
@@ -7,7 +6,7 @@ export function createYojnaRequestHandler(
    tagRepository
 ) {
 
-   return YojnaRequestHandler(
+   return new YojnaRequestHandler(
       authorRepository = authorRepository,
       tagRepository = tagRepository,
       yojnaRepository =  yojnaRepository

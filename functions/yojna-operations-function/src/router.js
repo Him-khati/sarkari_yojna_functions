@@ -28,21 +28,18 @@ export class Router {
             case '/fetch_yojnas':
             case '/add_yojna':
             case '/update_yojna':
-                yojnaRequestHandler.handleRequest(
+                return this.yojnaRequestHandler.handleRequest(
                     request,
                     response
                 );
-                break;
             case '/update_fcm_token':
-                fcmTokenRequestHandler.handleRequest(
+                return this.fcmTokenRequestHandler.handleRequest(
                     request,
                     response
                 );
-                break;
 
             default:
-                response.send({ error: 'Path not found' }, 404);
+                return response.send({ error: 'Path not found' }, 404);
         }
-
     }
 }

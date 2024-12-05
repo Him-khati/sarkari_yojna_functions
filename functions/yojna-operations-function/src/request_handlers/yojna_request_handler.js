@@ -14,22 +14,26 @@ export class YojnaRequestHandler {
 
         switch (request.path) {
             case '/fetch_yojnas':
-                fetchYojnaList(request, response);
-                break;
+                return this.fetchYojnaList(request, response);
             case '/add_yojna':
-                addNewYojna(request, response);
-                break;
+                return response.json({
+                    motto: "Build like a team of hundreds_",
+                    learn: "https://appwrite.io/docs",
+                    connect: "https://appwrite.io/discord",
+                    getInspired: "https://builtwith.appwrite.io",
+                  });
             case '/update_yojna':
-                updateYojna(request, response);
-                break;
+                return this.updateYojna(request, response);
             default:
-                response.send({
+                return response.send({
                     error: 'Path not found'
                 }, 404);
         }
     }
 
     async addNewYojna(req, res) {
+
+        
         const requestData = req.payload ? JSON.parse(req.payload) : {};
 
         const yojna = requestData.yojna;
@@ -112,7 +116,9 @@ export class YojnaRequestHandler {
     ) {
         yojna.tags = tagIds;
         yojna.authors = authorIds;
-
-        this.yojnaRepostiory.
     }
 }
+
+export default {
+    YojnaRequestHandler
+};

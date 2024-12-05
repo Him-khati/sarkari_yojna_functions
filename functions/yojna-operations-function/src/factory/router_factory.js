@@ -1,7 +1,7 @@
-import { Client,Databases } from 'node-appwrite';
+import { Client, Databases } from 'node-appwrite';
 import { Router } from "../router.js";
-import { createYojnaRequestHandler } from './request_handler_factory.js'
 import { createAuthorRepository, createTagsRepository, createYojnaRepository } from './repository_factory.js';
+import { createYojnaRequestHandler } from './request_handler_factory.js';
 
 
 export function createRouter(req) {
@@ -17,13 +17,13 @@ export function createRouter(req) {
     const authorRepository = createAuthorRepository(database);
 
     const yojnaRequestHandler = createYojnaRequestHandler(
-        authorRepository = authorRepository,
-        yojnaRepository = yojnaRepository,
-        tagRepository = tagRepository
+        authorRepository,
+        yojnaRepository,
+        tagRepository
     )
 
-    return Router(
-        yojnaRequestHandler = yojnaRequestHandler,
-        fcmTokenRequestHandler = null
+    return new Router(
+        yojnaRequestHandler,
+        null
     );
 }
