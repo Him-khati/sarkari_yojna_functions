@@ -15,8 +15,8 @@ export class BaseRepository {
 
 
     create = async (
-        documentId, 
-        data
+        data,
+        documentId
     ) => {
         try {
 

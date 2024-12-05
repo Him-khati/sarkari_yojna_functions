@@ -24,7 +24,7 @@ export class Router {
         request,
         response
     ) {
-        switch (expression) {
+        switch (request.path) {
             case '/fetch_yojnas':
             case '/add_yojna':
             case '/update_yojna':

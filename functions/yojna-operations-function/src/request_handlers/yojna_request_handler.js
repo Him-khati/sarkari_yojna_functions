@@ -3,11 +3,11 @@ export class YojnaRequestHandler {
     constructor(
         authorRepository,
         tagRepository,
-        yojnaRepostiory
+        yojnaRepository
     ) {
         this.authorRepository = authorRepository;
         this.tagRepository = tagRepository;
-        this.yojnaRepostiory = yojnaRepostiory;
+        this.yojnaRepository = yojnaRepository;
     }
 
     async handleRequest(request, response) {
