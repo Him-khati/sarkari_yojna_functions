@@ -1,42 +1,24 @@
-import { Client, Users,Databases } from 'node-appwrite';
-// import { add,update,remove,read,readAll } from "./yojna_repository.js";
-// import { authenticateUser } from "./auth.js";
+import { authenticate } from "./validators/authenticator.js";
+import { isPathValid,handleRequest } from "./router.js";
 
-// This Appwrite function will be executed every time your function is triggered
 export default async ({ req, res, log, error }) => { 
 
-  // try{
-  //   authenticateUser();
-  // } catch(e){
-  //   return res.send({ error: 'Unauthorise Access' }, 401);
-  // }
+  const path = req.path;
+  const authToken = req.headers['authorization'];
+  const requestData = req.payload;
 
-  // You can use the Appwrite SDK to interact with other services
-  // For this example, we're using the Users service
-  const client = new Client()
-    .setEndpoint(process.env.APPWRITE_FUNCTION_API_ENDPOINT)
-    .setProject(process.env.APPWRITE_FUNCTION_PROJECT_ID)
-    .setKey(req.headers['x-appwrite-key'] ?? '');
-  
-  const users = new Users(client);
-  const database = new Databases(client);
-
-  // The req object contains the request data
-  if (req.path === "/fetch_yojnas") {
-      try {
-          const response = await database.listDocuments('674f22820004257f51ca', 'yojna');
-          console.log(response);
-          return res.send(response);
-      } catch (error) {
-          console.error(error);
-          return res.send(error);
-      }
-
-  } else if(req.path == "/add_yojna"){
-    return res.send({ error: 'Path not found' }, 404);
-  } else if(req.path == "/update_yojna"){
-    return res.send({ error: 'Path not found' }, 404);
-  } else{
-    return res.send({ error: 'Path not found' }, 404);
+  // Step 1: Validate Path
+  if (!isPathValid(path)) {
+      return res.send({ error: 'Path not found' }, 404);
   }
+
+  // Step 2: Authenticate Request
+  if (!authenticate(authToken)) {
+      return res.send({ error: 'Unauthorized Access' }, 401);
+  }
+
+  handleRequest(
+    req,
+    res
+  );
 };
