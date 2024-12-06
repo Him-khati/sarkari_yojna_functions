@@ -1,3 +1,4 @@
+import { ID } from 'node-appwrite';
 
 export class BaseRepository {
     // Database Id
@@ -20,10 +21,10 @@ export class BaseRepository {
     ) => {
         try {
 
-            return await database.createDocument(
+            return await this.database.createDocument(
                 this.#DATABASE_ID,
                 this.collectionId,
-                documentId,
+                documentId ?? ID.unique(),
                 data
             );
         } catch (error) {
@@ -37,7 +38,7 @@ export class BaseRepository {
     ) => {
         try {
 
-            return await database.getDocument(
+            return await this.database.getDocument(
                 this.#DATABASE_ID,
                 this.collectionId,
                 documentId
@@ -55,7 +56,7 @@ export class BaseRepository {
 
         try {
 
-            return await database.updateDocument(
+            return await this.database.updateDocument(
                 this.#DATABASE_ID,
                 this.collectionId,
                 documentId,
@@ -72,7 +73,7 @@ export class BaseRepository {
     ) => {
         try {
 
-            return await database.deleteDocument(
+            return await this.database.deleteDocument(
                 this.#DATABASE_ID,
                 this.collectionId,
                 documentId
@@ -86,7 +87,7 @@ export class BaseRepository {
     read = async (query = []) => {
         try {
 
-            return await database.listDocuments(
+            return await this.database.listDocuments(
                 this.#DATABASE_ID,
                 this.collectionId,
                 query

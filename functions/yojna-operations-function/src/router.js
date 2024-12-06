@@ -28,10 +28,12 @@ export class Router {
             case '/fetch_yojnas':
             case '/add_yojna':
             case '/update_yojna':
+                console.log(`Path ${request.path} called`);
                 return this.yojnaRequestHandler.handleRequest(
                     request,
                     response
                 );
+
             case '/update_fcm_token':
                 return this.fcmTokenRequestHandler.handleRequest(
                     request,
