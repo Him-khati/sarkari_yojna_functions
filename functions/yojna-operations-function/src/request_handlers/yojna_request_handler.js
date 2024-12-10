@@ -31,8 +31,22 @@ export class YojnaRequestHandler {
     }
 
     async fetchYojnaList(req, res) {
-        
 
+        try {
+
+            const yojnaList = await this.yojnaRepository.read();
+            return res.json({
+             "status" : true,
+             "yojna" : yojnaList
+            });
+            
+        } catch (error) {
+            const sessionId = "ded"; //TODO fix nano id
+            // sessionId = nanoid();
+
+            console.log(`[${sessionId}] Error Fetching yojna ${error}`);
+            return res.json({ error: `[${sessionId}] Error Fetching yojna list` }, 500);
+        }
     }
 
     async addNewYojna(req, res) {
